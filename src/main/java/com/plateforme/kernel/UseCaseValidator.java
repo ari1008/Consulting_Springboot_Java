@@ -1,7 +1,8 @@
-package com.plateforme.validation;
+package com.plateforme.kernel;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
+
 public final class UseCaseValidator {
 
     private static UseCaseValidator INSTANCE = null;
