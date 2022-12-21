@@ -2,17 +2,17 @@ package com.plateforme.consultant.exposition;
 
 
 import com.plateforme.consultant.application.CreateConsultantCommand;
+import com.plateforme.consultant.application.UpdateConsultantCommand;
+import com.plateforme.consultant.domain.Consultant;
 import com.plateforme.kernel.Command;
 import com.plateforme.kernel.CommandBus;
 import com.plateforme.kernel.QueryBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/consultants")
@@ -29,9 +29,32 @@ public class ConsultantWebController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CreateConsultantResponse create(@RequestBody @Valid CreateConsultantRequest createConsultantRequest) {
-        var consultantId = (String) commandBus.post( new CreateConsultantCommand(createConsultantRequest.name, createConsultantRequest.password ));
+        var consultantId = (String) commandBus.post( new CreateConsultantCommand(
+                createConsultantRequest.firstName,
+                createConsultantRequest.lastName,
+                createConsultantRequest.modality,
+                createConsultantRequest.startDate,
+                createConsultantRequest.endDate,
+                createConsultantRequest.tjm
+        ));
         return new CreateConsultantResponse(consultantId);
     }
+
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ModifyConsultantResponse modify(@RequestBody @Valid ModifyConsultantRequest modifyConsultantRequest){
+        var consultant =  commandBus.post(new UpdateConsultantCommand(
+                UUID.fromString(modifyConsultantRequest.id), modifyConsultantRequest.firstName,
+                        modifyConsultantRequest.lastName, modifyConsultantRequest.modality,
+                modifyConsultantRequest.startDate, modifyConsultantRequest.endDate, modifyConsultantRequest.tjm));
+        System.out.println(consultant.toString());
+         /*return new ModifyConsultantResponse(consultant.getConsultantId().value(), consultant.getFirstName(), consultant.getLastName(),
+                 consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(),consultant.getTjm())   ;*/
+        return  null;
+    }
+
+
+
 
 
 }

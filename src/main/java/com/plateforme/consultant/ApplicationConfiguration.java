@@ -2,7 +2,10 @@ package com.plateforme.consultant;
 
 
 import com.plateforme.consultant.application.events.ConsultantCreatedEventHandler;
+import com.plateforme.consultant.application.events.ConsultantUpdateApplicationEvent;
+import com.plateforme.consultant.application.events.ConsultantUpdateEventHandler;
 import com.plateforme.consultant.application.service.CreateConsultantService;
+import com.plateforme.consultant.application.service.UpdateConsultantService;
 import com.plateforme.consultant.exposition.CreateConsultantResponse;
 import com.plateforme.consultant.infrastructure.ConsultantEntityRepository;
 import com.plateforme.consultant.infrastructure.JPAConsultant;
@@ -36,12 +39,24 @@ public class ApplicationConfiguration {
     }
 
     @Bean
+    public UpdateConsultantService updateConsultantService(){
+        return new UpdateConsultantService(consultant(), eventDispatcher());
+    }
+
+    @Bean
     public LogNotifications notifications() {
         return new LogNotifications();
     }
 
     @Bean
-    public ConsultantCreatedEventHandler accountCreatedEventHandler() {
+    public ConsultantCreatedEventHandler consultantCreatedEventHandler() {
         return new ConsultantCreatedEventHandler(notifications());
     }
+
+    @Bean
+    public ConsultantUpdateEventHandler consultantUpdateEventHandler(){
+        return new ConsultantUpdateEventHandler(notifications());
+    }
+
+
 }

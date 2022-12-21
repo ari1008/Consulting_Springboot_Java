@@ -2,34 +2,51 @@ package com.plateforme.consultant.domain;
 
 import com.plateforme.kernel.Event;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Consultant {
-    private final String name;
-    private final String password;
 
     private final  ConsultantId consultantId;
+    private final String firstName;
+
+    private final  String lastName;
+
+    private final String modality;
+
+    private final Date startDate;
+
+    private final Date endDate;
+
+    private final Double tjm;
+
+
 
     private List<Event> recordedEvents;
 
-    public Consultant(String name, String password, ConsultantId consultantId){
+
+    public Consultant(ConsultantId consultantId, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm, List<Event> recordedEvents) {
         this.consultantId = consultantId;
-        this.name = name;
-        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.modality = modality;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tjm = tjm;
+        this.recordedEvents = recordedEvents;
+    }
+
+    public Consultant(ConsultantId consultantId, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
+        this.consultantId = consultantId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.modality = modality;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tjm = tjm;
         this.recordedEvents = new ArrayList<>();
-        this.recordedEvents.add(new ConsultantCreated(consultantId, name, password));
-    }
+        this.recordedEvents.add(new ConsultantCreated(consultantId, firstName, lastName, modality, startDate, endDate, tjm));
 
-    public Consultant(String name, String password, ConsultantId consultantId,List<Event> events ){
-        this.consultantId = consultantId;
-        this.name = name;
-        this.password = password;
-        this.recordedEvents = events;
     }
-
 
     public List<Event> getRecordedEvents() {
         return Collections.unmodifiableList(recordedEvents);
@@ -39,9 +56,29 @@ public class Consultant {
         return consultantId;
     }
 
-    public String getPassword(){return  password;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getName(){return  name;}
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getModality() {
+        return modality;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Double getTjm() {
+        return tjm;
+    }
 
     @Override
     public boolean equals(Object o) {

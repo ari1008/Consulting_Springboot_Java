@@ -2,10 +2,8 @@ package com.plateforme.consultant.application.service;
 
 import com.plateforme.consultant.application.CreateConsultantCommand;
 import com.plateforme.consultant.application.events.ConsultantCreatedApplicationEvent;
-import com.plateforme.consultant.application.events.ConsultantCreatedEventHandler;
 import com.plateforme.consultant.domain.Consultant;
 import com.plateforme.consultant.domain.Consultants;
-import com.plateforme.kernel.Command;
 import com.plateforme.kernel.CommandHandler;
 import com.plateforme.kernel.Event;
 import com.plateforme.kernel.EventDispatcher;
@@ -24,11 +22,9 @@ public class CreateConsultantService implements CommandHandler<CreateConsultantC
     @Override
     public String handle(CreateConsultantCommand command) {
         var consultantId = consultants.nextId();
-        System.out.println(consultantId.value());
-        var consultant = new Consultant(command.name, command.password, consultantId);
+        var consultant = new Consultant(consultantId, command.getFirstName(), command.getLastName(), command.getModality(), command.getStartDate(), command.getEndDate(), command.getTjm());
         consultants.add(consultant);
-        eventDispatcher.dispatch(new ConsultantCreatedApplicationEvent(consultant.getConsultantId()
-                , consultant.getName(), consultant.getPassword()));
+        eventDispatcher.dispatch(new ConsultantCreatedApplicationEvent(consultant.getConsultantId(), consultant.getFirstName(), consultant.getLastName(), consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(), consultant.getTjm()));
         return consultantId.value();
 
     }

@@ -3,48 +3,74 @@ package com.plateforme.consultant.infrastructure;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "consultant")
 public class ConsultantEntity {
-    @Id
+    @MongoId
     private UUID id;
-    @UniqueElements
-    private String name;
+    private final String firstName;
 
-    private String password;
+    private final  String lastName;
+
+    private final String modality;
+
+    private final Date startDate;
+
+    private final Date endDate;
+
+    private final Double tjm;
 
     private List<EventEntity> recordedEvents;
 
-    public UUID getId(){
-        return id;
-    }
-
-    public void setId(UUID id) {
+    public ConsultantEntity(UUID id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm, List<EventEntity> recordedEvents) {
         this.id = id;
-    }
-
-    public ConsultantEntity(UUID id, String name, String password, List<EventEntity> recordedEvents) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.modality = modality;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tjm = tjm;
         this.recordedEvents = recordedEvents;
     }
 
-    public String getName(){return name;}
+    public UUID getId() {
+        return id;
+    }
 
-    public String getPassword(){return password;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public void setName(String name){this.name = name;}
-    public void setPassword(String password){this.password = password;}
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getModality() {
+        return modality;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Double getTjm() {
+        return tjm;
+    }
 
     public List<EventEntity> getRecordedEvents() {
         return recordedEvents;
     }
 
-    public void setRecordedEvents(List<EventEntity> recordedEvents) {
-        this.recordedEvents = recordedEvents;
-    }
+
+
+
 }

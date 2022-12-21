@@ -7,4 +7,6 @@ public interface Consultants {
     Consultant findById(ConsultantId consultantId);
 
     void add(Consultant consultant);
+
+    void update(Consultant consultant);
 }

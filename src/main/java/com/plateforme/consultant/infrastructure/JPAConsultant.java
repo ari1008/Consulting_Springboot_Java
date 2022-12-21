@@ -48,7 +48,10 @@ public class JPAConsultant implements Consultants {
                 }
             }
 
-            return new Consultant( consultantEntity.getName(),consultantEntity.getPassword() ,ConsultantId.of(consultantEntity.getId()),  result);
+            return new Consultant(consultantId,
+                    consultantEntity.getFirstName(),consultantEntity.getLastName() , consultantEntity.getModality(),
+                    consultantEntity.getStartDate(), consultantEntity.getEndDate(), consultantEntity.getTjm()
+                    ,  result);
         }
         throw ConsultantException.notFoundAccountId(consultantId);
 
@@ -58,11 +61,31 @@ public class JPAConsultant implements Consultants {
     public void add(Consultant consultant) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        var accountEntity = new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
-                consultant.getName(),
-                consultant.getPassword(),
+        var consultantEntity = new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
+                consultant.getFirstName(),
+                consultant.getLastName(),
+                consultant.getModality(),
+                consultant.getStartDate(),
+                consultant.getEndDate(),
+                consultant.getTjm(),
                 consultant.getRecordedEvents().stream().map(event ->
                         new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
-        consultantEntityRepository.save(accountEntity);
+        consultantEntityRepository.save(consultantEntity);
+    }
+
+    @Override
+    public void update(Consultant consultant) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        final Gson gson = gsonBuilder.create();
+        var consultantEntity = new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
+                consultant.getFirstName(),
+                consultant.getLastName(),
+                consultant.getModality(),
+                consultant.getStartDate(),
+                consultant.getEndDate(),
+                consultant.getTjm(),
+                consultant.getRecordedEvents().stream().map(event ->
+                        new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
+        consultantEntityRepository.save(consultantEntity);
     }
 }

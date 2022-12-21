@@ -1,29 +1,32 @@
-package com.plateforme.consultant.application.events;
+package com.plateforme.consultant.application;
 
-import com.plateforme.consultant.domain.Consultant;
-import com.plateforme.consultant.domain.ConsultantId;
-import com.plateforme.kernel.Event;
+import com.plateforme.kernel.Command;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.UUID;
 
-public class ConsultantCreatedApplicationEvent implements Event {
+public class UpdateConsultantCommand implements Command {
 
-    private final  ConsultantId consultantId;
+    @NotNull
+    private final UUID id;
+
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 
     private final Date startDate;
 
+
     private final Date endDate;
 
     private final Double tjm;
 
-    public ConsultantCreatedApplicationEvent(ConsultantId consultantId, String firstName,
-                                             String lastName, String modality, Date startDate, Date endDate, Double tjm) {
-        this.consultantId = consultantId;
+
+    public UpdateConsultantCommand(UUID id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.modality = modality;
@@ -32,8 +35,8 @@ public class ConsultantCreatedApplicationEvent implements Event {
         this.tjm = tjm;
     }
 
-    public ConsultantId getConsultantId() {
-        return consultantId;
+    public UUID getId() {
+        return id;
     }
 
     public String getFirstName() {
