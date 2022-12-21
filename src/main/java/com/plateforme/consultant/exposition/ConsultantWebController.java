@@ -4,6 +4,7 @@ package com.plateforme.consultant.exposition;
 import com.plateforme.consultant.application.CreateConsultantCommand;
 import com.plateforme.consultant.application.UpdateConsultantCommand;
 import com.plateforme.consultant.domain.Consultant;
+import com.plateforme.consultant.domain.ConsultantId;
 import com.plateforme.kernel.Command;
 import com.plateforme.kernel.CommandBus;
 import com.plateforme.kernel.QueryBus;
@@ -43,14 +44,13 @@ public class ConsultantWebController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ModifyConsultantResponse modify(@RequestBody @Valid ModifyConsultantRequest modifyConsultantRequest){
-        var consultant =  commandBus.post(new UpdateConsultantCommand(
+        var consultant = (Consultant) commandBus.post(new UpdateConsultantCommand(
                 UUID.fromString(modifyConsultantRequest.id), modifyConsultantRequest.firstName,
                         modifyConsultantRequest.lastName, modifyConsultantRequest.modality,
                 modifyConsultantRequest.startDate, modifyConsultantRequest.endDate, modifyConsultantRequest.tjm));
-        System.out.println(consultant.toString());
-         /*return new ModifyConsultantResponse(consultant.getConsultantId().value(), consultant.getFirstName(), consultant.getLastName(),
-                 consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(),consultant.getTjm())   ;*/
-        return  null;
+
+         return new ModifyConsultantResponse(consultant.getConsultantId().value(), consultant.getFirstName(), consultant.getLastName(),
+                 consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(),consultant.getTjm())   ;
     }
 
 

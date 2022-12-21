@@ -10,7 +10,7 @@ import com.plateforme.kernel.EventDispatcher;
 
 
 
-public class UpdateConsultantService implements CommandHandler<UpdateConsultantCommand, String> {
+public class UpdateConsultantService implements CommandHandler<UpdateConsultantCommand, Consultant> {
 
     private final Consultants consultants;
 
@@ -22,7 +22,7 @@ public class UpdateConsultantService implements CommandHandler<UpdateConsultantC
     }
 
     @Override
-    public String handle(UpdateConsultantCommand command) {
+    public Consultant handle(UpdateConsultantCommand command) {
         var consultantId  = ConsultantId.of(command.getId());
         var consultantEntity = consultants.findById(consultantId);
         var  result = create(consultantId, command, consultantEntity);
@@ -31,7 +31,7 @@ public class UpdateConsultantService implements CommandHandler<UpdateConsultantC
                 result.getConsultantId(), result.getFirstName(), result.getLastName(), result.getModality(),
                 result.getStartDate(), result.getEndDate(), result.getTjm()
         ));
-        return result.getConsultantId().value();
+        return result;
     }
 
     private Consultant create(ConsultantId consultantId, UpdateConsultantCommand command, Consultant consultant){
