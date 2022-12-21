@@ -88,4 +88,9 @@ public class JPAConsultant implements Consultants {
                         new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
         consultantEntityRepository.save(consultantEntity);
     }
+
+    @Override
+    public List<Consultant> search(int page, int size, String filterOne, String filterAnd, String orders) {
+        return null;
+    }
 }
