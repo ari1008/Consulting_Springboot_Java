@@ -3,19 +3,29 @@ package com.plateforme.consultant.infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.plateforme.consultant.domain.*;
+import com.plateforme.consultant.infrastructure.dto.FilterCondition;
+import com.plateforme.consultant.infrastructure.dto.PageResponse;
+import com.plateforme.consultant.infrastructure.support.FilterBuilderService;
+import com.plateforme.consultant.infrastructure.support.GenericFilterCriteriaBuilder;
 import com.plateforme.kernel.Event;
-import org.springframework.web.ErrorResponseException;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
+
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JPAConsultant implements Consultants {
 
     private final  ConsultantEntityRepository consultantEntityRepository;
+
+    @Autowired
+    private ConsultantSearchRepository consultantSearchRepository;
 
 
 
@@ -90,7 +100,42 @@ public class JPAConsultant implements Consultants {
     }
 
     @Override
-    public List<Consultant> search(int page, int size, String filterOne, String filterAnd, String orders) {
-        return null;
+    public List<Consultant> search(int page, int size, String filterOr, String filterAnd, String orders) throws Exception {
+        PageResponse<ConsultantEntity> response = new PageResponse<>();
+        FilterBuilderService filterBuilderService = new FilterBuilderService();
+        Pageable pageable = filterBuilderService.getPageable(size, page, orders);
+        GenericFilterCriteriaBuilder filterCriteriaBuilder = new GenericFilterCriteriaBuilder();
+        List<FilterCondition> andConditions = filterBuilderService.createFilterCondition(filterAnd);
+        List<FilterCondition> orConditions = filterBuilderService.createFilterCondition(filterOr);
+        Query query = filterCriteriaBuilder.addCondition(andConditions, orConditions);
+        MongoServiceConsultant mongoServiceConsultant = new MongoServiceConsultant(consultantSearchRepository);
+        Page<ConsultantEntity> pg = mongoServiceConsultant.getPage(query, pageable);
+        response.setPageStats(pg, pg.getContent());
+        List<ConsultantEntity> consultantEntityList = response.getItems();
+        return transformConsultantEntityToConsultant(consultantEntityList);
+
+
+
+
+    }
+
+    private List<Consultant> transformConsultantEntityToConsultant(List<ConsultantEntity> consultantEntityList){
+        Stream<ConsultantEntity> stream = listToStream(consultantEntityList);
+        return stream.map(this::createConsultant).toList();
+    }
+
+    private static <T> Stream<T> listToStream (List<T> list) {
+        return list.stream();
+    }
+
+
+    private Consultant createConsultant(ConsultantEntity consultantEntity){
+        return new Consultant(ConsultantId.of(consultantEntity.getId()),
+                consultantEntity.getFirstName(),
+                consultantEntity.getLastName(),
+                consultantEntity.getModality(),
+                consultantEntity.getStartDate(),
+                consultantEntity.getEndDate(),
+                consultantEntity.getTjm());
     }
 }

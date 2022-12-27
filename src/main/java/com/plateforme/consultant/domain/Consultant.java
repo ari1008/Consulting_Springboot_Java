@@ -18,10 +18,7 @@ public class Consultant {
     private final Date endDate;
 
     private final Double tjm;
-
-
-
-    private List<Event> recordedEvents;
+    private  List<Event> recordedEvents;
 
 
     public Consultant(ConsultantId consultantId, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm, List<Event> recordedEvents) {

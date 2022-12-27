@@ -2,11 +2,11 @@ package com.plateforme.consultant;
 
 
 import com.plateforme.consultant.application.events.ConsultantCreatedEventHandler;
-import com.plateforme.consultant.application.events.ConsultantUpdateApplicationEvent;
+import com.plateforme.consultant.application.events.ConsultantSearchEventHandler;
 import com.plateforme.consultant.application.events.ConsultantUpdateEventHandler;
 import com.plateforme.consultant.application.service.CreateConsultantService;
+import com.plateforme.consultant.application.service.SearchConsultantService;
 import com.plateforme.consultant.application.service.UpdateConsultantService;
-import com.plateforme.consultant.exposition.CreateConsultantResponse;
 import com.plateforme.consultant.infrastructure.ConsultantEntityRepository;
 import com.plateforme.consultant.infrastructure.JPAConsultant;
 import com.plateforme.consultant.infrastructure.LogNotifications;
@@ -24,6 +24,8 @@ public class ApplicationConfiguration {
     @Bean
     public JPAConsultant consultant(){return  new JPAConsultant(consultantEntityRepository);}
 
+
+
     @Bean
     public CommandBus commandBus(){return BusFactory.defaultCommandBus();}
 
@@ -36,6 +38,11 @@ public class ApplicationConfiguration {
     @Bean
     public CreateConsultantService createAccountService() {
         return new CreateConsultantService(consultant(), eventDispatcher());
+    }
+
+    @Bean
+    public SearchConsultantService searchConsultantService(){
+        return new SearchConsultantService(consultant(), eventDispatcher());
     }
 
     @Bean
@@ -56,6 +63,12 @@ public class ApplicationConfiguration {
     @Bean
     public ConsultantUpdateEventHandler consultantUpdateEventHandler(){
         return new ConsultantUpdateEventHandler(notifications());
+    }
+
+
+    @Bean
+    public ConsultantSearchEventHandler  consultantSearchEventHandler(){
+        return  new ConsultantSearchEventHandler(notifications());
     }
 
 

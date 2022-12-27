@@ -13,5 +13,5 @@ public interface Consultants {
     void update(Consultant consultant);
 
     List<Consultant> search(int page, int size, String filterOne,
-                            String filterAnd, String orders);
+                            String filterAnd, String orders) throws Exception;
 }

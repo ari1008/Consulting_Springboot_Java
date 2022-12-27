@@ -54,9 +54,9 @@ public class ConsultantWebController {
                  consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(),consultant.getTjm())   ;
     }
 
-    @GetMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchConsultantResponse searchConsultant(@RequestBody @Valid SearchConsultantRequest searchConsultantRequest){
-        var searchListConsultantsResult = (List<Consultant>) commandBus.post(new SearchConsultantCommand(
+        var searchListConsultantsResult = (List<ModifyConsultantResponse>) commandBus.post(new SearchConsultantCommand(
                 searchConsultantRequest.getPage(),  searchConsultantRequest.getSize(), searchConsultantRequest.getFilterOr(),
                 searchConsultantRequest.getFilterAnd(), searchConsultantRequest.getOrders()
         ));

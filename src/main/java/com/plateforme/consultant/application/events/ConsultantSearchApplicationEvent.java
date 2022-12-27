@@ -26,4 +26,12 @@ public class ConsultantSearchApplicationEvent implements Event {
         this.filterAnd = filterAnd;
         this.orders = orders;
     }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }

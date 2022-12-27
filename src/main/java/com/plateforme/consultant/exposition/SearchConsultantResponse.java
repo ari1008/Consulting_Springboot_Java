@@ -21,9 +21,9 @@ public class SearchConsultantResponse {
 
     private final String orders;
 
-    private final  List<Consultant> consultants;
+    private final  List<ModifyConsultantResponse> consultants;
 
-    public SearchConsultantResponse(int page, int size, String filterOr, String filterAnd, String orders, List<Consultant> consultants) {
+    public SearchConsultantResponse(int page, int size, String filterOr, String filterAnd, String orders, List<ModifyConsultantResponse> consultants) {
         this.page = page;
         this.size = size;
         this.filterOr = filterOr;
@@ -52,7 +52,7 @@ public class SearchConsultantResponse {
         return orders;
     }
 
-    public List<Consultant> getConsultants() {
+    public List<ModifyConsultantResponse> getConsultants() {
         return consultants;
     }
 }

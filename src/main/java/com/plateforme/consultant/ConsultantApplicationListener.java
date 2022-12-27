@@ -1,12 +1,11 @@
 package com.plateforme.consultant;
 
 import com.plateforme.consultant.application.CreateConsultantCommand;
+import com.plateforme.consultant.application.SearchConsultantCommand;
 import com.plateforme.consultant.application.UpdateConsultantCommand;
-import com.plateforme.consultant.application.events.ConsultantCreatedApplicationEvent;
-import com.plateforme.consultant.application.events.ConsultantCreatedEventHandler;
-import com.plateforme.consultant.application.events.ConsultantUpdateApplicationEvent;
-import com.plateforme.consultant.application.events.ConsultantUpdateEventHandler;
+import com.plateforme.consultant.application.events.*;
 import com.plateforme.consultant.application.service.CreateConsultantService;
+import com.plateforme.consultant.application.service.SearchConsultantService;
 import com.plateforme.consultant.application.service.UpdateConsultantService;
 import com.plateforme.kernel.CommandBus;
 import com.plateforme.kernel.EventDispatcher;
@@ -30,27 +29,35 @@ public class ConsultantApplicationListener implements ApplicationListener<Contex
 
     private final UpdateConsultantService updateConsultantService;
 
+    private final SearchConsultantService searchConsultantService;
+
 
     private final ConsultantCreatedEventHandler consultantCreatedEventHandler;
 
     private final ConsultantUpdateEventHandler consultantUpdateEventHandler;
 
-    public ConsultantApplicationListener(CommandBus commandBus, QueryBus queryBus, EventDispatcher eventDispatcher, CreateConsultantService createConsultantService, UpdateConsultantService updateConsultantService, ConsultantCreatedEventHandler consultantCreatedEventHandler, ConsultantUpdateEventHandler consultantUpdateEventHandler) {
+    private final ConsultantSearchEventHandler consultantSearchEventHandler;
+
+    public ConsultantApplicationListener(CommandBus commandBus, QueryBus queryBus, EventDispatcher eventDispatcher, CreateConsultantService createConsultantService, UpdateConsultantService updateConsultantService, SearchConsultantService searchConsultantService, ConsultantCreatedEventHandler consultantCreatedEventHandler, ConsultantUpdateEventHandler consultantUpdateEventHandler, ConsultantSearchEventHandler consultantSearchEventHandler) {
         this.commandBus = commandBus;
         this.queryBus = queryBus;
         this.eventDispatcher = eventDispatcher;
         this.createConsultantService = createConsultantService;
         this.updateConsultantService = updateConsultantService;
+        this.searchConsultantService = searchConsultantService;
         this.consultantCreatedEventHandler = consultantCreatedEventHandler;
         this.consultantUpdateEventHandler = consultantUpdateEventHandler;
+        this.consultantSearchEventHandler = consultantSearchEventHandler;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         eventDispatcher.register(ConsultantCreatedApplicationEvent.class, consultantCreatedEventHandler);
         eventDispatcher.register(ConsultantUpdateApplicationEvent.class, consultantUpdateEventHandler);
+        eventDispatcher.register(ConsultantSearchApplicationEvent.class, consultantSearchEventHandler);
         commandBus.register(CreateConsultantCommand.class, createConsultantService);
         commandBus.register(UpdateConsultantCommand.class, updateConsultantService );
+        commandBus.register(SearchConsultantCommand.class, searchConsultantService);
 
     }
 }
