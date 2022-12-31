@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "309ee225-b4a1-489e-8dc4-c2431ba5a670",
+		"name": "Consultant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23296354"
+	},
+	"item": [
+		{
+			"name": "Create Consultant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"hello12\",\n    \"lastName\": \"test\",\n    \"modality\": \"je ne comptend pas poiuf oerlverlvrelvlerkvlke\",\n    \"startDate\": \"2022-04-23\",\n    \"endDate\": \"2022-04-30\",\n    \"tjm\": 1200\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/consultants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Consultant",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"e0b66288-aaeb-4362-ba03-36582d335ad4\",\n    \"firstName\": \"hello12\",\n    \"lastName\": \"test\",\n    \"modality\": \"je ne comptend pas poiuf oerlverlvrelvlerkvlke\",\n    \"startDate\": \"2022-04-23\",\n    \"endDate\": \"2022-04-30\"\n    \n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/consultants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Consultant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"size\": 20,\n    \"orders\": \"lastName|ASC\",\n    \"filterAnd\": \"firstName|eq|hello\",\n    \"filterOr\": \"lastName|eq|test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/consultants/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultants",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
