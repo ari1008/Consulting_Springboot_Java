@@ -14,6 +14,6 @@ public class ConsultantUpdateEventHandler implements EventHandler<ConsultantUpda
 
     @Override
     public void handle(ConsultantUpdateApplicationEvent event) {
-        notifications.notify(String.format("Notification of the consultant creation %s with %s.", event.getConsultantId(), event.getFirstName()));
+        notifications.notify(String.format("Notification of the consultant update %s with %s.", event.getConsultantId(), event.getFirstName()));
     }
 }
