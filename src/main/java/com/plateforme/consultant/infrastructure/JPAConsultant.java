@@ -71,32 +71,22 @@ public class JPAConsultant implements Consultants {
     public void add(Consultant consultant) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        var consultantEntity = new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
-                consultant.getFirstName(),
-                consultant.getLastName(),
-                consultant.getModality(),
-                consultant.getStartDate(),
-                consultant.getEndDate(),
-                consultant.getTjm(),
-                consultant.getRecordedEvents().stream().map(event ->
-                        new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
-        consultantEntityRepository.save(consultantEntity);
+        consultantEntityRepository.save(consultantEntityRepository.save(createConsultantEntity(consultant,gson)));
     }
 
     @Override
     public void update(Consultant consultant) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        var consultantEntity = new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
-                consultant.getFirstName(),
-                consultant.getLastName(),
-                consultant.getModality(),
-                consultant.getStartDate(),
-                consultant.getEndDate(),
-                consultant.getTjm(),
-                consultant.getRecordedEvents().stream().map(event ->
-                        new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
-        consultantEntityRepository.save(consultantEntity);
+        consultantEntityRepository.save(createConsultantEntity(consultant,gson));
+    }
+
+    @Override
+    public void saveAll(List<Consultant> consultants) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        final Gson gson = gsonBuilder.create();
+        List<ConsultantEntity> consultantEntityList = consultants.stream().map(consultant -> createConsultantEntity(consultant, gson)).toList();
+        consultantEntityRepository.saveAll(consultantEntityList);
     }
 
     @Override
@@ -137,5 +127,17 @@ public class JPAConsultant implements Consultants {
                 consultantEntity.getStartDate(),
                 consultantEntity.getEndDate(),
                 consultantEntity.getTjm());
+    }
+
+    private ConsultantEntity createConsultantEntity(Consultant consultant, Gson gson){
+        return new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
+                consultant.getFirstName(),
+                consultant.getLastName(),
+                consultant.getModality(),
+                consultant.getStartDate(),
+                consultant.getEndDate(),
+                consultant.getTjm(),
+                consultant.getRecordedEvents().stream().map(event ->
+                        new EventEntity(event.getClass().getName(), gson.toJson(event))).collect(Collectors.toList()));
     }
 }

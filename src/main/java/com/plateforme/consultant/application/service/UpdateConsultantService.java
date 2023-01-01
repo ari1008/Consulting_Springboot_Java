@@ -44,10 +44,10 @@ public class UpdateConsultantService implements CommandHandler<UpdateConsultantC
         var modality = command.getModality() != null ? command.getModality() : consultant.getModality();
         var tjm = command.getTjm() != null ? command.getTjm() : consultant.getTjm();
         List<Event> eventRecorded = new ArrayList<>();
+        consultant.getRecordedEvents().stream().forEach(event -> eventRecorded.add(event));
         eventRecorded.add(new ConsultantUpdated(
                 consultantId, firstName, lastName, modality, startDate, endDate, tjm
         ));
-        consultant.getRecordedEvents().stream().forEach(event -> eventRecorded.add(event));
         return  new Consultant(consultantId,
                 firstName, lastName, modality, startDate, endDate, tjm, eventRecorded);
     }

@@ -84,4 +84,8 @@ public class Consultant {
         Consultant consultant = (Consultant) o;
         return Objects.equals(consultantId, consultant.consultantId);
     }
+
+    public void setRecordedEvents(List<Event> recordedEvents) {
+        this.recordedEvents = recordedEvents;
+    }
 }

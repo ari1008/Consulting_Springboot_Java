@@ -9,6 +9,6 @@ public class ConsultantSearchEventHandler implements EventHandler<ConsultantSear
     public  ConsultantSearchEventHandler(Notifications notifications){this.notifications = notifications;}
     @Override
     public void handle(ConsultantSearchApplicationEvent event) {
-        notifications.notify(String.format("Notification of the search consultant  size of page %s  page  %s.", event.getSize(), event.getPage()));
+        notifications.notify(String.format("Notification of the search consultant  size of  %s  page  %s.", event.getSize(), event.getPage()));
     }
 }
