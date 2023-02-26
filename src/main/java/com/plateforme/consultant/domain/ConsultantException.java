@@ -12,7 +12,7 @@ public class ConsultantException extends RuntimeException {
         return new ConsultantException(String.format("%s not found.", consultantIdId.value()));
     }
 
-    public static ConsultantException beginDateStartAfterDateEnd(Date startDate, Date endDate){
+    public static ConsultantException beginDateStartAfterDateEnd(Date startDate, Date endDate) {
         return new ConsultantException(String.format("date start %s > date end %s", startDate.toString(), endDate.toString()));
     }
 

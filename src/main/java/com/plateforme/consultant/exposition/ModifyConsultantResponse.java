@@ -11,7 +11,7 @@ public class ModifyConsultantResponse {
     @NotNull
     public final String firstName;
     @NotNull
-    public final  String lastName;
+    public final String lastName;
     @NotNull
     public final String modality;
 

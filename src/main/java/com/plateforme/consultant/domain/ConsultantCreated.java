@@ -4,12 +4,12 @@ import com.plateforme.kernel.Event;
 
 import java.util.Date;
 
-public class ConsultantCreated  implements Event {
+public class ConsultantCreated implements Event {
 
-    private final  ConsultantId consultantId;
+    private final ConsultantId consultantId;
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 
@@ -29,7 +29,9 @@ public class ConsultantCreated  implements Event {
         this.tjm = tjm;
     }
 
-    public ConsultantId getConsultantId(){return consultantId;}
+    public ConsultantId getConsultantId() {
+        return consultantId;
+    }
 
     public String getFirstName() {
         return firstName;

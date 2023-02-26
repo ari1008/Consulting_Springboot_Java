@@ -8,7 +8,7 @@ import java.util.List;
 public class SearchConsultantResponse {
 
     @NotNull
-    private  final int page;
+    private final int page;
 
     @NotNull
     private final int size;
@@ -21,7 +21,7 @@ public class SearchConsultantResponse {
 
     private final String orders;
 
-    private final  List<ModifyConsultantResponse> consultants;
+    private final List<ModifyConsultantResponse> consultants;
 
     public SearchConsultantResponse(int page, int size, String filterOr, String filterAnd, String orders, List<ModifyConsultantResponse> consultants) {
         this.page = page;

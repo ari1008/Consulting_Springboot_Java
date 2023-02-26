@@ -3,7 +3,7 @@ package com.plateforme.consultant.domain;
 import com.plateforme.kernel.Event;
 
 public class ConsultantSearched implements Event {
-    private  final int page;
+    private final int page;
 
     private final int size;
 

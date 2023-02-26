@@ -4,8 +4,8 @@ import com.plateforme.consultant.infrastructure.enums.FilterOperationEnum;
 
 public class FilterCondition {
 
-    private final  String field;
-    private  final FilterOperationEnum operator;
+    private final String field;
+    private final FilterOperationEnum operator;
     private final Object value;
 
     public FilterCondition(String field, FilterOperationEnum operator, Object value) {

@@ -31,7 +31,7 @@ public class ConsultantWebController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CreateConsultantResponse create(@RequestBody @Valid CreateConsultantRequest createConsultantRequest) {
-        var consultantId = (String) commandBus.post( new CreateConsultantCommand(
+        var consultantId = (String) commandBus.post(new CreateConsultantCommand(
                 createConsultantRequest.firstName,
                 createConsultantRequest.lastName,
                 createConsultantRequest.modality,
@@ -44,20 +44,20 @@ public class ConsultantWebController {
 
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModifyConsultantResponse modify(@RequestBody @Valid ModifyConsultantRequest modifyConsultantRequest){
+    public ModifyConsultantResponse modify(@RequestBody @Valid ModifyConsultantRequest modifyConsultantRequest) {
         var consultant = (Consultant) commandBus.post(new UpdateConsultantCommand(
                 UUID.fromString(modifyConsultantRequest.id), modifyConsultantRequest.firstName,
-                        modifyConsultantRequest.lastName, modifyConsultantRequest.modality,
+                modifyConsultantRequest.lastName, modifyConsultantRequest.modality,
                 modifyConsultantRequest.startDate, modifyConsultantRequest.endDate, modifyConsultantRequest.tjm));
 
-         return new ModifyConsultantResponse(consultant.getConsultantId().value(), consultant.getFirstName(), consultant.getLastName(),
-                 consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(),consultant.getTjm())   ;
+        return new ModifyConsultantResponse(consultant.getConsultantId().value(), consultant.getFirstName(), consultant.getLastName(),
+                consultant.getModality(), consultant.getStartDate(), consultant.getEndDate(), consultant.getTjm());
     }
 
-    @PostMapping( value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public SearchConsultantResponse searchConsultant(@RequestBody @Valid SearchConsultantRequest searchConsultantRequest){
+    @PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public SearchConsultantResponse searchConsultant(@RequestBody @Valid SearchConsultantRequest searchConsultantRequest) {
         var searchListConsultantsResult = (List<ModifyConsultantResponse>) commandBus.post(new SearchConsultantCommand(
-                searchConsultantRequest.getPage(),  searchConsultantRequest.getSize(), searchConsultantRequest.getFilterOr(),
+                searchConsultantRequest.getPage(), searchConsultantRequest.getSize(), searchConsultantRequest.getFilterOr(),
                 searchConsultantRequest.getFilterAnd(), searchConsultantRequest.getOrders()
         ));
         return new SearchConsultantResponse(searchConsultantRequest.getPage(), searchConsultantRequest.getSize(),
@@ -65,9 +65,6 @@ public class ConsultantWebController {
                 searchConsultantRequest.getFilterAnd(), searchConsultantRequest.getOrders(), searchListConsultantsResult);
 
     }
-
-
-
 
 
 }

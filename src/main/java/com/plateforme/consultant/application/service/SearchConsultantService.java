@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class SearchConsultantService  implements CommandHandler<SearchConsultantCommand, List<ModifyConsultantResponse>> {
+public class SearchConsultantService implements CommandHandler<SearchConsultantCommand, List<ModifyConsultantResponse>> {
 
 
     private final Consultants consultants;
@@ -28,7 +28,7 @@ public class SearchConsultantService  implements CommandHandler<SearchConsultant
     public List<ModifyConsultantResponse> handle(SearchConsultantCommand command) throws Exception {
         var result = consultants.search(command.getPage(), command.getSize(),
                 command.getFilterAnd(), command.getFilterOr(), command.getOrders());
-        var listUpdate  = result.stream().map(consultant -> addEventConsultant(consultant, command )).toList();
+        var listUpdate = result.stream().map(consultant -> addEventConsultant(consultant, command)).toList();
         consultants.saveAll(listUpdate);
         eventDispatcher.dispatch(
                 new ConsultantSearchApplicationEvent(command.getPage(), command.getSize(), command.getFilterOr(),
@@ -42,7 +42,7 @@ public class SearchConsultantService  implements CommandHandler<SearchConsultant
         this.eventDispatcher = eventDispatcher;
     }
 
-    public ModifyConsultantResponse createConsultanteResponse(Consultant consultant){
+    public ModifyConsultantResponse createConsultanteResponse(Consultant consultant) {
         return new ModifyConsultantResponse(
                 consultant.getConsultantId().value(),
                 consultant.getFirstName(),
@@ -54,13 +54,12 @@ public class SearchConsultantService  implements CommandHandler<SearchConsultant
         );
     }
 
-    private Consultant addEventConsultant(Consultant consultant, SearchConsultantCommand command ){
+    private Consultant addEventConsultant(Consultant consultant, SearchConsultantCommand command) {
         List<Event> event = new ArrayList<>(consultant.getRecordedEvents());
         event.add(new ConsultantSearched(command.getPage(), command.getSize(), command.getFilterOr(), command.getFilterAnd(), command.getOrders()));
         consultant.setRecordedEvents(event);
         return consultant;
     }
-
 
 
 }

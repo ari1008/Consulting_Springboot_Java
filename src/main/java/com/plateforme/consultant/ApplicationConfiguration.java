@@ -22,18 +22,25 @@ public class ApplicationConfiguration {
     private ConsultantEntityRepository consultantEntityRepository;
 
     @Bean
-    public JPAConsultant consultant(){return  new JPAConsultant(consultantEntityRepository);}
-
+    public JPAConsultant consultant() {
+        return new JPAConsultant(consultantEntityRepository);
+    }
 
 
     @Bean
-    public CommandBus commandBus(){return BusFactory.defaultCommandBus();}
+    public CommandBus commandBus() {
+        return BusFactory.defaultCommandBus();
+    }
 
     @Bean
-    public QueryBus queryBus(){return BusFactory.defaultQueryBus();}
+    public QueryBus queryBus() {
+        return BusFactory.defaultQueryBus();
+    }
 
     @Bean
-    public EventDispatcher eventDispatcher(){return DefaultEventDispatcher.create();}
+    public EventDispatcher eventDispatcher() {
+        return DefaultEventDispatcher.create();
+    }
 
     @Bean
     public CreateConsultantService createAccountService() {
@@ -41,12 +48,12 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public SearchConsultantService searchConsultantService(){
+    public SearchConsultantService searchConsultantService() {
         return new SearchConsultantService(consultant(), eventDispatcher());
     }
 
     @Bean
-    public UpdateConsultantService updateConsultantService(){
+    public UpdateConsultantService updateConsultantService() {
         return new UpdateConsultantService(consultant(), eventDispatcher());
     }
 
@@ -61,14 +68,14 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public ConsultantUpdateEventHandler consultantUpdateEventHandler(){
+    public ConsultantUpdateEventHandler consultantUpdateEventHandler() {
         return new ConsultantUpdateEventHandler(notifications());
     }
 
 
     @Bean
-    public ConsultantSearchEventHandler  consultantSearchEventHandler(){
-        return  new ConsultantSearchEventHandler(notifications());
+    public ConsultantSearchEventHandler consultantSearchEventHandler() {
+        return new ConsultantSearchEventHandler(notifications());
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.query.Query;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,15 +23,14 @@ import java.util.stream.Stream;
 
 public class JPAConsultant implements Consultants {
 
-    private final  ConsultantEntityRepository consultantEntityRepository;
+    private final ConsultantEntityRepository consultantEntityRepository;
 
     @Autowired
     private ConsultantSearchRepository consultantSearchRepository;
 
 
-
-    public JPAConsultant(ConsultantEntityRepository consultantEntityRepository){
-        this.consultantEntityRepository =consultantEntityRepository;
+    public JPAConsultant(ConsultantEntityRepository consultantEntityRepository) {
+        this.consultantEntityRepository = consultantEntityRepository;
     }
 
 
@@ -59,9 +59,9 @@ public class JPAConsultant implements Consultants {
             }
 
             return new Consultant(consultantId,
-                    consultantEntity.getFirstName(),consultantEntity.getLastName() , consultantEntity.getModality(),
+                    consultantEntity.getFirstName(), consultantEntity.getLastName(), consultantEntity.getModality(),
                     consultantEntity.getStartDate(), consultantEntity.getEndDate(), consultantEntity.getTjm()
-                    ,  result);
+                    , result);
         }
         throw ConsultantException.notFoundAccountId(consultantId);
 
@@ -71,14 +71,14 @@ public class JPAConsultant implements Consultants {
     public void add(Consultant consultant) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        consultantEntityRepository.save(consultantEntityRepository.save(createConsultantEntity(consultant,gson)));
+        consultantEntityRepository.save(consultantEntityRepository.save(createConsultantEntity(consultant, gson)));
     }
 
     @Override
     public void update(Consultant consultant) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        consultantEntityRepository.save(createConsultantEntity(consultant,gson));
+        consultantEntityRepository.save(createConsultantEntity(consultant, gson));
     }
 
     @Override
@@ -105,21 +105,19 @@ public class JPAConsultant implements Consultants {
         return transformConsultantEntityToConsultant(consultantEntityList);
 
 
-
-
     }
 
-    private List<Consultant> transformConsultantEntityToConsultant(List<ConsultantEntity> consultantEntityList){
+    private List<Consultant> transformConsultantEntityToConsultant(List<ConsultantEntity> consultantEntityList) {
         Stream<ConsultantEntity> stream = listToStream(consultantEntityList);
         return stream.map(this::createConsultant).toList();
     }
 
-    private static <T> Stream<T> listToStream (List<T> list) {
+    private static <T> Stream<T> listToStream(List<T> list) {
         return list.stream();
     }
 
 
-    private Consultant createConsultant(ConsultantEntity consultantEntity){
+    private Consultant createConsultant(ConsultantEntity consultantEntity) {
         return new Consultant(ConsultantId.of(consultantEntity.getId()),
                 consultantEntity.getFirstName(),
                 consultantEntity.getLastName(),
@@ -129,7 +127,7 @@ public class JPAConsultant implements Consultants {
                 consultantEntity.getTjm());
     }
 
-    private ConsultantEntity createConsultantEntity(Consultant consultant, Gson gson){
+    private ConsultantEntity createConsultantEntity(Consultant consultant, Gson gson) {
         return new ConsultantEntity(UUID.fromString(consultant.getConsultantId().value()),
                 consultant.getFirstName(),
                 consultant.getLastName(),

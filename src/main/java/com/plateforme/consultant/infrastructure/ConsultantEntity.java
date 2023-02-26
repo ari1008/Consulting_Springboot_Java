@@ -15,7 +15,7 @@ public class ConsultantEntity {
     private UUID id;
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 
@@ -69,8 +69,6 @@ public class ConsultantEntity {
     public List<EventEntity> getRecordedEvents() {
         return recordedEvents;
     }
-
-
 
 
 }

@@ -56,7 +56,7 @@ public class ConsultantApplicationListener implements ApplicationListener<Contex
         eventDispatcher.register(ConsultantUpdateApplicationEvent.class, consultantUpdateEventHandler);
         eventDispatcher.register(ConsultantSearchApplicationEvent.class, consultantSearchEventHandler);
         commandBus.register(CreateConsultantCommand.class, createConsultantService);
-        commandBus.register(UpdateConsultantCommand.class, updateConsultantService );
+        commandBus.register(UpdateConsultantCommand.class, updateConsultantService);
         commandBus.register(SearchConsultantCommand.class, searchConsultantService);
 
     }

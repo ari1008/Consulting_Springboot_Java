@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class ConsultantSearchApplicationEvent implements Event {
 
     @NotNull
-    private  final int page;
+    private final int page;
 
     @NotNull
     private final int size;

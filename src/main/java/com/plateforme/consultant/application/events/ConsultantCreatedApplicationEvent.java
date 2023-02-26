@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class ConsultantCreatedApplicationEvent implements Event {
 
-    private final  ConsultantId consultantId;
+    private final ConsultantId consultantId;
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 

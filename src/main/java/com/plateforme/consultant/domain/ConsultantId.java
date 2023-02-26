@@ -6,9 +6,13 @@ import java.util.UUID;
 public class ConsultantId {
     private final UUID value;
 
-    private ConsultantId(UUID value){this.value = value;}
+    private ConsultantId(UUID value) {
+        this.value = value;
+    }
 
-    public static ConsultantId of(UUID value){return new ConsultantId(value);}
+    public static ConsultantId of(UUID value) {
+        return new ConsultantId(value);
+    }
 
     public String value() {
         return value.toString();

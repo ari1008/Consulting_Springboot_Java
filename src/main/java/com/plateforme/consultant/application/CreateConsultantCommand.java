@@ -8,11 +8,10 @@ import java.util.Date;
 public class CreateConsultantCommand implements Command {
 
 
-
     @NotNull
     private final String firstName;
     @NotNull
-    private final  String lastName;
+    private final String lastName;
     @NotNull
     private final String modality;
     @NotNull

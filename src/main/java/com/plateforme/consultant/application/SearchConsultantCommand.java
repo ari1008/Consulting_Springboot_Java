@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class SearchConsultantCommand implements Command {
 
     @NotNull
-    private  final int page;
+    private final int page;
 
     @NotNull
     private final int size;
@@ -46,8 +46,6 @@ public class SearchConsultantCommand implements Command {
         this.filterAnd = filterAnd;
         this.orders = orders;
     }
-
-
 
 
 }

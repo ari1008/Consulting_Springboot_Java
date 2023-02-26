@@ -1,5 +1,7 @@
 package com.plateforme.consultant.exposition;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -9,20 +11,25 @@ public class ModifyConsultantRequest {
     public String id;
 
 
-    public  String firstName;
+    public String firstName;
 
-    public   String lastName;
+    public String lastName;
 
-    public  String modality;
+    public String modality;
 
 
-    public  Date startDate;
+    public Date startDate;
 
-    public  Date endDate;
+    public Date endDate;
 
-    public  Double tjm;
+    public Double tjm;
 
-    public ModifyConsultantRequest(String id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
+    public ModifyConsultantRequest(@JsonProperty("fistName") String firstName,
+                                   @JsonProperty("lastName") String lastName,
+                                   @JsonProperty("modality") String modality,
+                                   @JsonProperty("startDate") Date startDate,
+                                   @JsonProperty("endDate") Date endDate,
+                                   @JsonProperty("tjm") Double tjm) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

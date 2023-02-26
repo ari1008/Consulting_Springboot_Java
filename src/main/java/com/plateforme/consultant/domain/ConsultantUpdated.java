@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class ConsultantUpdated implements Event {
 
-    private final  ConsultantId consultantId;
+    private final ConsultantId consultantId;
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 

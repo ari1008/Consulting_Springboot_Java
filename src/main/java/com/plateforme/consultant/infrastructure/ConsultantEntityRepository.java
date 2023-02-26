@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Repository
-public interface ConsultantEntityRepository extends MongoRepository<ConsultantEntity, String>  {
+public interface ConsultantEntityRepository extends MongoRepository<ConsultantEntity, String> {
 }

@@ -1,11 +1,13 @@
 package com.plateforme.consultant.exposition;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 
 public class SearchConsultantRequest {
 
     @NotNull
-    private  final int page;
+    private final int page;
 
     @NotNull
     private final int size;
@@ -19,7 +21,11 @@ public class SearchConsultantRequest {
     private final String orders;
 
 
-    public SearchConsultantRequest(int page, int size, String filterOr, String filterAnd, String orders) {
+    public SearchConsultantRequest(@JsonProperty("page") int page,
+                                   @JsonProperty("size") int size,
+                                   @JsonProperty("filterOr") String filterOr,
+                                   @JsonProperty("filterAnd") String filterAnd,
+                                   @JsonProperty("orders") String orders) {
         this.page = page;
         this.size = size;
         this.filterOr = filterOr;

@@ -5,12 +5,12 @@ import com.plateforme.kernel.Event;
 
 import java.util.Date;
 
-public class ConsultantUpdateApplicationEvent  implements Event {
+public class ConsultantUpdateApplicationEvent implements Event {
 
     private final ConsultantId consultantId;
     private final String firstName;
 
-    private final  String lastName;
+    private final String lastName;
 
     private final String modality;
 
