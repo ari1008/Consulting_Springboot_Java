@@ -1,4 +1,4 @@
-package com.plateforme.consultant.infrastructure;
+package com.plateforme.consultant.infrastructure.entity;
 
 public class EventEntity {
     private String classname;

@@ -7,7 +7,7 @@ import com.plateforme.consultant.application.events.ConsultantUpdateEventHandler
 import com.plateforme.consultant.application.service.CreateConsultantService;
 import com.plateforme.consultant.application.service.SearchConsultantService;
 import com.plateforme.consultant.application.service.UpdateConsultantService;
-import com.plateforme.consultant.infrastructure.ConsultantEntityRepository;
+import com.plateforme.consultant.infrastructure.repository.ConsultantEntityRepository;
 import com.plateforme.consultant.infrastructure.JPAConsultant;
 import com.plateforme.consultant.infrastructure.LogNotifications;
 import com.plateforme.kernel.*;

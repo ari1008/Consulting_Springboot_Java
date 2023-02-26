@@ -7,10 +7,8 @@ import java.util.List;
 
 public class SearchConsultantResponse {
 
-    @NotNull
     private final int page;
 
-    @NotNull
     private final int size;
 
 

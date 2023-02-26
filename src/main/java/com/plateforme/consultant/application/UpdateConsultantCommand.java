@@ -9,7 +9,7 @@ import java.util.UUID;
 public class UpdateConsultantCommand implements Command {
 
     @NotNull
-    private final UUID id;
+    private final String id;
 
     private final String firstName;
 
@@ -25,7 +25,7 @@ public class UpdateConsultantCommand implements Command {
     private final Double tjm;
 
 
-    public UpdateConsultantCommand(UUID id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
+    public UpdateConsultantCommand(String id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +35,7 @@ public class UpdateConsultantCommand implements Command {
         this.tjm = tjm;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

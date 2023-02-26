@@ -1,7 +1,5 @@
 package com.plateforme.consultant.domain;
 
-import com.plateforme.consultant.infrastructure.ConsultantEntity;
-
 import java.util.List;
 
 public interface Consultants {

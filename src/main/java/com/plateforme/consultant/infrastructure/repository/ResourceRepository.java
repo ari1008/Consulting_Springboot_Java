@@ -1,4 +1,4 @@
-package com.plateforme.consultant.infrastructure;
+package com.plateforme.consultant.infrastructure.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

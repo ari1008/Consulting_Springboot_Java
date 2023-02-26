@@ -46,7 +46,7 @@ public class ConsultantWebController {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ModifyConsultantResponse modify(@RequestBody @Valid ModifyConsultantRequest modifyConsultantRequest) {
         var consultant = (Consultant) commandBus.post(new UpdateConsultantCommand(
-                UUID.fromString(modifyConsultantRequest.id), modifyConsultantRequest.firstName,
+                modifyConsultantRequest.id, modifyConsultantRequest.firstName,
                 modifyConsultantRequest.lastName, modifyConsultantRequest.modality,
                 modifyConsultantRequest.startDate, modifyConsultantRequest.endDate, modifyConsultantRequest.tjm));
 

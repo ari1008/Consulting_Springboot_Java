@@ -9,6 +9,7 @@ import com.plateforme.kernel.EventDispatcher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class UpdateConsultantService implements CommandHandler<UpdateConsultantCommand, Consultant> {
@@ -24,7 +25,7 @@ public class UpdateConsultantService implements CommandHandler<UpdateConsultantC
 
     @Override
     public Consultant handle(UpdateConsultantCommand command) {
-        var consultantId = ConsultantId.of(command.getId());
+        var consultantId = ConsultantId.of(UUID.fromString(command.getId()));
         var consultantEntity = consultants.findById(consultantId);
         System.out.println(consultantEntity.getRecordedEvents().toString());
         var result = create(consultantId, command, consultantEntity);

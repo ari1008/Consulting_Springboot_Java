@@ -1,7 +1,5 @@
-package com.plateforme.consultant.infrastructure;
+package com.plateforme.consultant.infrastructure.entity;
 
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 

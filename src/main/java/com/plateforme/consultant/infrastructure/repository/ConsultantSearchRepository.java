@@ -1,6 +1,7 @@
-package com.plateforme.consultant.infrastructure;
+package com.plateforme.consultant.infrastructure.repository;
 
 
+import com.plateforme.consultant.infrastructure.entity.ConsultantEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository

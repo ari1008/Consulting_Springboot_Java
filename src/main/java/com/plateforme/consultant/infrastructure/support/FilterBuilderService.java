@@ -1,8 +1,7 @@
 package com.plateforme.consultant.infrastructure.support;
 
-import com.plateforme.consultant.domain.ConsultantException;
 import com.plateforme.consultant.infrastructure.dto.FilterCondition;
-import com.plateforme.consultant.infrastructure.enums.FilterOperationEnum;
+import com.plateforme.consultant.infrastructure.FilterOperationEnum;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 

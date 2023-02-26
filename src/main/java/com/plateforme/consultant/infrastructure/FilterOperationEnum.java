@@ -1,4 +1,4 @@
-package com.plateforme.consultant.infrastructure.enums;
+package com.plateforme.consultant.infrastructure;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

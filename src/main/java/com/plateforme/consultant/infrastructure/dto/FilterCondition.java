@@ -1,6 +1,6 @@
 package com.plateforme.consultant.infrastructure.dto;
 
-import com.plateforme.consultant.infrastructure.enums.FilterOperationEnum;
+import com.plateforme.consultant.infrastructure.FilterOperationEnum;
 
 public class FilterCondition {
 

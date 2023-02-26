@@ -1,7 +1,7 @@
 package com.plateforme.consultant;
 
 
-import com.plateforme.consultant.infrastructure.support.ResourceRepositoryImpl;
+import com.plateforme.consultant.infrastructure.repository.ResourceRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;

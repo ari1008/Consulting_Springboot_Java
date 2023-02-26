@@ -3,18 +3,15 @@ package com.plateforme.consultant.application.service;
 import com.plateforme.consultant.application.SearchConsultantCommand;
 import com.plateforme.consultant.application.events.ConsultantSearchApplicationEvent;
 import com.plateforme.consultant.domain.Consultant;
-import com.plateforme.consultant.domain.ConsultantId;
 import com.plateforme.consultant.domain.ConsultantSearched;
 import com.plateforme.consultant.domain.Consultants;
 import com.plateforme.consultant.exposition.ModifyConsultantResponse;
-import com.plateforme.consultant.infrastructure.ConsultantEntity;
 import com.plateforme.kernel.CommandHandler;
 import com.plateforme.kernel.Event;
 import com.plateforme.kernel.EventDispatcher;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class SearchConsultantService implements CommandHandler<SearchConsultantCommand, List<ModifyConsultantResponse>> {

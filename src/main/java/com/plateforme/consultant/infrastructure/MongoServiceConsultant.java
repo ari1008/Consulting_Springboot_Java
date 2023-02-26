@@ -1,6 +1,7 @@
 package com.plateforme.consultant.infrastructure;
 
-import org.springframework.context.annotation.Bean;
+import com.plateforme.consultant.infrastructure.entity.ConsultantEntity;
+import com.plateforme.consultant.infrastructure.repository.ConsultantSearchRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.query.Query;

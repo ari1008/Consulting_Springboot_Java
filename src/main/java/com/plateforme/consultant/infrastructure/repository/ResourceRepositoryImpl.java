@@ -1,6 +1,6 @@
-package com.plateforme.consultant.infrastructure.support;
+package com.plateforme.consultant.infrastructure.repository;
 
-import com.plateforme.consultant.infrastructure.ResourceRepository;
+import com.plateforme.consultant.infrastructure.repository.ResourceRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

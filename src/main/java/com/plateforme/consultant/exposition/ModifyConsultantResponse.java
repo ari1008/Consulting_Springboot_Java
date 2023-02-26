@@ -5,21 +5,18 @@ import java.util.Date;
 
 public class ModifyConsultantResponse {
 
-    @NotNull
     public final String id;
 
-    @NotNull
     public final String firstName;
-    @NotNull
+
     public final String lastName;
-    @NotNull
+
     public final String modality;
 
-    @NotNull
     public final Date startDate;
-    @NotNull
+
     public final Date endDate;
-    @NotNull
+
     public final Double tjm;
 
     public ModifyConsultantResponse(String id, String firstName, String lastName, String modality, Date startDate, Date endDate, Double tjm) {
