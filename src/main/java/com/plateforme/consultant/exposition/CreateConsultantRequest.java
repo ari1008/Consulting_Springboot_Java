@@ -25,7 +25,7 @@ public class CreateConsultantRequest {
     @NotNull
     public final Double tjm;
 
-    public CreateConsultantRequest(@JsonProperty("fistName") String firstName,
+    public CreateConsultantRequest(@JsonProperty("firstName") String firstName,
                                    @JsonProperty("lastName") String lastName,
                                    @JsonProperty("modality") String modality,
                                    @JsonProperty("startDate") Date startDate,
